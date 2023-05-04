@@ -31,6 +31,14 @@ app.post("/api/auth/register", async (req, res) => {
   res.json({ email, stripeId: customer.id });
 });
 
+app.get("/products", async  (req, res)=>{
+  const {data}=await axios.get("http://localhost:4000/products");
+  res.json(data)
+  
+})
+
+
+
 app.post("/api/checkout_session", async (req, res) => {});
 
 app.listen(port, () => {
