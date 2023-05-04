@@ -22,13 +22,13 @@ app.post("/api/auth/register", async (req, res) => {
     .post("http://localhost:5000/users", {
       email,
       password,
-        stripeId: customer.id,
+      stripeId: customer.id,
     })
     .then((response) => {
       console.log(response.data);
     });
 
-  res.json(customer);
+  res.json({ email, stripeId: customer.id });
 });
 
 app.post("/api/checkout_session", async (req, res) => {});

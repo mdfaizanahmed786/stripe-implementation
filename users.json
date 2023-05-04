@@ -5,6 +5,60 @@
       "password": "ldfdlfj95",
       "stripeId": "cus_Nph1Dj8lZZfC3u",
       "id": 1
+    },
+    {
+      "email": "sami@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Npk0wHu8D557tw",
+      "id": 2
+    },
+    {
+      "email": "sami@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Npk1xMVXgBgDJJ",
+      "id": 3
+    },
+    {
+      "email": "faizanzaid789@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Npk2xFNLsXJQdr",
+      "id": 4
+    },
+    {
+      "email": "faizanzaid789@gmail.com",
+      "password": "dlfjdljf",
+      "stripeId": "cus_Npk5IveB1v949t",
+      "id": 5
+    },
+    {
+      "email": "actiongamesandtrailers@gmail.com",
+      "password": "dfdf",
+      "stripeId": "cus_NpkiqvRszfxFZc",
+      "id": 6
+    },
+    {
+      "email": "lol@gmail.com",
+      "password": "dfdf",
+      "stripeId": "cus_NpkizUjlGXEeVa",
+      "id": 7
+    },
+    {
+      "email": "john@gmail.com",
+      "password": "dfdf",
+      "stripeId": "cus_NpkjUPq6Kv7CHd",
+      "id": 8
+    },
+    {
+      "email": "chicken@gmail.com",
+      "password": "dfdf",
+      "stripeId": "cus_NpklQJQgVrQwgf",
+      "id": 9
+    },
+    {
+      "email": "faizanzaid789@gmail.com",
+      "password": "dfdf",
+      "stripeId": "cus_NpkmbnznBxVWfw",
+      "id": 10
     }
   ]
 }
