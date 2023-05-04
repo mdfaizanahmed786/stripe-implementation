@@ -1,0 +1,59 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "jhowison0@illinois.edu",
+      "password": "mkCWweWC0JLV"
+    },
+    {
+      "id": 2,
+      "email": "ehaggie1@phpbb.com",
+      "password": "Ea1RYK9V"
+    },
+    {
+      "id": 3,
+      "email": "kbadby2@behance.net",
+      "password": "2dz7QhSquN9"
+    },
+    {
+      "id": 4,
+      "email": "lmaingot3@google.pl",
+      "password": "apwHQ1EPbtjz"
+    },
+    {
+      "id": 5,
+      "email": "cclapperton4@google.ca",
+      "password": "a3msy9kIV"
+    },
+    {
+      "id": 6,
+      "email": "espybey5@github.io",
+      "password": "iBYghCD"
+    },
+    {
+      "id": 7,
+      "email": "arosensaft6@chicagotribune.com",
+      "password": "DkXmmv"
+    },
+    {
+      "id": 8,
+      "email": "pbrute7@smugmug.com",
+      "password": "N8UsiB"
+    },
+    {
+      "id": 9,
+      "email": "einker8@sakura.ne.jp",
+      "password": "9Xh2Wc"
+    },
+    {
+      "id": 10,
+      "email": "npeidro9@meetup.com",
+      "password": "4XBcTXPV"
+    },
+    {
+      "email": "faizan@gmail.com",
+      "password": "ldfdlfj95",
+      "id": 11
+    }
+  ]
+}
