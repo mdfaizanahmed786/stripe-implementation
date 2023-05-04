@@ -5,6 +5,12 @@
       "password": "rehana",
       "stripeId": "cus_NplAZwC2CRndxR",
       "id": 1
+    },
+    {
+      "email": "faizan@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_NplKlju5vqKwpU",
+      "id": 2
     }
   ]
 }
