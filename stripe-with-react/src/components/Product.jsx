@@ -2,7 +2,6 @@
 
 
 const Product = (props) => {
-  console.log(props)
   return (
     <div
      onClick={props.onClick}

@@ -3,52 +3,62 @@
     {
       "id": 1,
       "product_name": "Carri",
-      "price": 24
+      "price": 24,
+      "quantity":1
     },
     {
       "product_name": "Saqlain",
       "price": 899,
-      "id": 2
+      "id": 2,
+      "quantity":1
     },
     {
       "id": 3,
       "product_name": "Julina",
-      "price": 74
+      "price": 74,
+      "quantity":1
     },
     {
       "id": 4,
       "product_name": "Mareah",
-      "price": 15
+      "price": 15,
+      "quantity":1
     },
     {
       "id": 5,
       "product_name": "Kassi",
-      "price": 77
+      "price": 77,
+      "quantity":1
     },
     {
       "id": 6,
       "product_name": "Ariel",
-      "price": 93
+      "price": 93,
+      "quantity":1
     },
     {
       "id": 7,
       "product_name": "Manon",
-      "price": 6
+      "price": 6,
+      "quantity":1
     },
     {
       "id": 8,
       "product_name": "Clayborne",
-      "price": 45
+      "price": 45,
+      "quantity":1
     },
     {
       "id": 9,
       "product_name": "Zsazsa",
-      "price": 1
+      "price": 1,
+      "quantity":1
     },
     {
       "id": 10,
       "product_name": "Allys",
-      "price": 94
+      "price": 94,
+      "quantity":1
     }
   ]
 }
