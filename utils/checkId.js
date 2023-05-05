@@ -1,20 +1,10 @@
 function checkId(bodyItem, data) {
-  const isIdAvailable = data.find((item) => item.id ===bodyItem.id);
+  const isIdAvailable = data.find((item) => item.id === bodyItem.id);
 
-  if (isIdAvailable) return {
-    success:true,
-    
-    price_data:{
-    
-      price: isIdAvailable.price,
-      
-    }
-  
+  if (isIdAvailable)
+    return true
 
-  }
-  return {
-    success:false,
-  };
+  return false
 }
 
-module.exports=checkId
+module.exports = checkId;

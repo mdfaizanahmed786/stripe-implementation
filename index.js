@@ -75,8 +75,6 @@ app.post("/api/create-product", async (req, res) => {
       originalPrice: productPrice,
     });
     res.status(200).json({ success: true });
-
-
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -97,21 +95,25 @@ app.post("/api/checkout_session", async (req, res) => {
 
   const checkoutObject = {
     payment_method_types: ["card"],
-    line_items:{},
+    line_items: items.map((item) => {
+      if (checkId(item, data)) {
+        return {
+          price: item.price,
+          quantity: item.quantity,
+        };
+      }
+    }),
     metadata: {
       email,
     },
     customer: customerId,
     mode: "payment",
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/failure",
+    success_url: "http://localhost:5173/success",
+    cancel_url: "http://localhost:5173/failure",
   };
 
-  console.log(checkoutObject.line_items);
-
   const session = await stripe.checkout.sessions.create(checkoutObject);
-  res.json({ id: session.id });
-  res.json({ success: true });
+  res.json({ url: session.url });
 });
 
 app.listen(port, () => {

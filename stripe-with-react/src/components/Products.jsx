@@ -5,6 +5,7 @@ import PersistedProducts from "./PersistedProducts";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+
   const user = JSON.parse(localStorage.getItem("user"));
   const [selectedProducts, setSelectedProducts] = useState(
     () => JSON.parse(localStorage.getItem("products")) || []
@@ -28,7 +29,10 @@ const Products = () => {
       }),
     });
     const session = await response.json();
-    console.log(session);
+    if (session) {
+      localStorage.removeItem("products");
+    }
+    window.location.href = session.url;
   };
   useEffect(() => {
     getProducts();
@@ -36,7 +40,7 @@ const Products = () => {
 
   const handleSelect = (product) => {
     const newProducts = { ...product };
-    delete newProducts.price;
+    delete newProducts.originalPrice;
     const storedProducts = JSON.parse(localStorage.getItem("products"));
     if (storedProducts) {
       const productIndex = storedProducts.findIndex(
@@ -81,13 +85,24 @@ const Products = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-center my-8">
+      <div className="flex gap-3 justify-center my-8">
         <button
           className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-bold py-2 px-4 rounded md:py-3 md:px-6 md:text-lg"
           disabled={selectedProducts.length === 0}
           onClick={handleCheckout}
         >
           Checkout
+        </button>
+
+        <button
+          className="bg-red-500 cursor-pointer hover:bg-red-700 text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-bold py-2 px-4 rounded md:py-3 md:px-6 md:text-lg"
+          disabled={selectedProducts.length === 0}
+          onClick={() => {
+            localStorage.removeItem("products");
+            setSelectedProducts([]);
+          }}
+        >
+          Clear Cart
         </button>
       </div>
     </div>
