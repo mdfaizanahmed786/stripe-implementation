@@ -5,17 +5,31 @@ import PersistedProducts from "./PersistedProducts";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [selectedProducts, setSelectedProducts] = useState(
     () => JSON.parse(localStorage.getItem("products")) || []
   );
-
-
 
   const getProducts = async () => {
     const { data } = await axios.get("http://localhost:3001/products");
     setProducts(data);
   };
 
+  const handleCheckout = async () => {
+    const response = await fetch("http://localhost:3001/api/checkout_session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: selectedProducts,
+        email: user?.email,
+        customerId: user?.stripeId,
+      }),
+    });
+    const session = await response.json();
+    console.log(session);
+  };
   useEffect(() => {
     getProducts();
   }, []);
@@ -68,7 +82,11 @@ const Products = () => {
         </div>
       </div>
       <div className="flex justify-center my-8">
-        <button className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-bold py-2 px-4 rounded md:py-3 md:px-6 md:text-lg" disabled={selectedProducts.length===0}>
+        <button
+          className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-bold py-2 px-4 rounded md:py-3 md:px-6 md:text-lg"
+          disabled={selectedProducts.length === 0}
+          onClick={handleCheckout}
+        >
           Checkout
         </button>
       </div>

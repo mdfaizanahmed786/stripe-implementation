@@ -6,6 +6,7 @@ require("dotenv").config();
 const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const axios = require("axios");
+const checkId = require("./utils/checkId");
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +16,14 @@ app.post("/api/auth/register", async (req, res) => {
   const { email, password } = req.body;
   const customer = await stripe.customers.create({
     email,
-    description: "My First Test Customer (created for API docs)",
+
+    address: {
+      line1: "510 Townsend St",
+      postal_code: "98140",
+      city: "San Francisco",
+      state: "CA",
+      country: "US",
+    },
   });
 
   axios
@@ -31,40 +39,79 @@ app.post("/api/auth/register", async (req, res) => {
   res.json({ email, stripeId: customer.id });
 });
 
-app.get("/products", async  (req, res)=>{
-  const {data}=await axios.get("http://localhost:4000/products");
-  res.json(data)
-  
-})
+app.get("/products", async (req, res) => {
+  const { data } = await axios.get("http://localhost:4000/products");
+
+  res.json(data);
+});
+
+app.post("/api/create-product", async (req, res) => {
+  const { name, imageURL, productPrice } = req.body;
+  if (!name || !imageURL || !productPrice) {
+    return res.status(400).json({ message: "Please provide all the fields" });
+  }
+
+  // creating the product
+  try {
+    const product = await stripe.products.create({
+      name,
+      images: [imageURL],
+    });
+
+    // creating the price for the product
+    const price = await stripe.prices.create({
+      product: product.id,
+      unit_amount: productPrice,
+
+      currency: "usd",
+    });
+    // This is where you acutally create the product in your database
+    await axios.post("http://localhost:4000/products", {
+      id: product.id,
+      name,
+      imageURL,
+      quantity: 1,
+      price: price.id,
+      originalPrice: productPrice,
+    });
+    res.status(200).json({ success: true });
 
 
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
 app.post("/api/checkout_session", async (req, res) => {
-  if(items.length===0){
-    return res.status(400).json({message:"No items in cart"})
+  const { items, email, customerId } = req.body;
+  if (items.length === 0) {
+    return res.status(400).json({ message: "No items in cart" });
   }
-  if(!email){
-    return res.status(400).json({message:"No email provided"})
+  if (!email) {
+    return res.status(400).json({ message: "No email provided" });
   }
-  if(!customerId){
-    return res.status(400).json({message:"No customer id provided"})
+  if (!customerId) {
+    return res.status(400).json({ message: "No customer id provided" });
   }
-const {items, email, customerId}=req.body
-  const checkoutObject={
+  const { data } = await axios.get("http://localhost:4000/products");
+
+  const checkoutObject = {
     payment_method_types: ["card"],
-    line_items:items,
-    metadata:{
+    line_items:{},
+    metadata: {
       email,
-    
     },
-    customer:customerId,
+    customer: customerId,
     mode: "payment",
     success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/failure",
-  }
+  };
 
-  const session=await stripe.checkout.sessions.create(checkoutObject)
-  res.json({id:session.id})
+  console.log(checkoutObject.line_items);
+
+  const session = await stripe.checkout.sessions.create(checkoutObject);
+  res.json({ id: session.id });
+  res.json({ success: true });
 });
 
 app.listen(port, () => {

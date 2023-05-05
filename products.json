@@ -1,64 +1,52 @@
 {
   "products": [
     {
-      "id": 1,
-      "product_name": "Carri",
-      "price": 24,
-      "quantity":1
+      "id": "prod_Nq1j6Mp4uGkMff",
+      "name": "Pencil",
+      "imageURL": "https://media.istockphoto.com/id/1216610305/vector/pencil-icon-eraser-pen-flat-design-and-back-to-school-concept-on-white-background.jpg?s=612x612&w=0&k=20&c=mICIEriPcqGMPydZM1_gayHn4vuUK2KydQ8iygXFG7w=",
+      "quantity": 1,
+      "price": "price_1N4LftDGMo9UUf7Qw1FhH25D",
+      "originalPrice": 300
     },
     {
-      "product_name": "Saqlain",
-      "price": 899,
-      "id": 2,
-      "quantity":1
+      "id": "prod_Nq1xamQjCnE5Ns",
+      "name": "Yamaha FZ",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnJW5MyC5xi2y1OoLz3kwcW78H65uCIxybg&usqp=CAU",
+      "quantity": 1,
+      "price": "price_1N4Lu0DGMo9UUf7QrvvXHtFl",
+      "originalPrice": 120000
     },
     {
-      "id": 3,
-      "product_name": "Julina",
-      "price": 74,
-      "quantity":1
+      "id": "prod_Nq1yeeZdMQxtQE",
+      "name": "GTA Vice city",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiS_4iXSvOZgFFaPdwhVt6Ptu99J6FJQbGPQ&usqp=CAU",
+      "quantity": 1,
+      "price": "price_1N4LuzDGMo9UUf7Q3nvuh97H",
+      "originalPrice": 200
     },
     {
-      "id": 4,
-      "product_name": "Mareah",
-      "price": 15,
-      "quantity":1
+      "id": "prod_Nq208ReTay5QET",
+      "name": "MacBook Pro",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsr1C7sZGIxDku3N_Znxoano10s5RqbfUlCLmvRy32BCQRGciYvz8J5GCUVnoRNO2zjgo&usqp=CAU",
+      "quantity": 1,
+      "price": "price_1N4LwfDGMo9UUf7QoC5JiuGf",
+      "originalPrice": 1200000
     },
     {
-      "id": 5,
-      "product_name": "Kassi",
-      "price": 77,
-      "quantity":1
+      "id": "prod_Nq221hKMlocrmd",
+      "name": "Ipad",
+      "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCe6CGr-gC7IyfAVVmfRd78p7OqHiTNVLWEA&usqp=CAU",
+      "quantity": 1,
+      "price": "price_1N4LxxDGMo9UUf7Q8eLRvKmv",
+      "originalPrice": 70000
     },
     {
-      "id": 6,
-      "product_name": "Ariel",
-      "price": 93,
-      "quantity":1
-    },
-    {
-      "id": 7,
-      "product_name": "Manon",
-      "price": 6,
-      "quantity":1
-    },
-    {
-      "id": 8,
-      "product_name": "Clayborne",
-      "price": 45,
-      "quantity":1
-    },
-    {
-      "id": 9,
-      "product_name": "Zsazsa",
-      "price": 1,
-      "quantity":1
-    },
-    {
-      "id": 10,
-      "product_name": "Allys",
-      "price": 94,
-      "quantity":1
+      "id": "prod_Nq24Zp1TSqoxum",
+      "name": "PS5",
+      "imageURL": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202204/Sony_PS5.jpg?VersionId=qeAlGw1qTGEA3buA7Zf7fBh.XidRoZrq&size=690:388",
+      "quantity": 1,
+      "price": "price_1N4M0jDGMo9UUf7QgHBTXRns",
+      "originalPrice": 90000
     }
   ]
 }

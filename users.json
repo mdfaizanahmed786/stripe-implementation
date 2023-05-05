@@ -11,6 +11,24 @@
       "password": "rehana",
       "stripeId": "cus_NplKlju5vqKwpU",
       "id": 2
+    },
+    {
+      "email": "faizanzaid789@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_NpyYkRK8pZySEU",
+      "id": 3
+    },
+    {
+      "email": "lol123@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Npyq8aYYIwjCl9",
+      "id": 4
+    },
+    {
+      "email": "lol123@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Nq0nVnteGz7rpm",
+      "id": 5
     }
   ]
 }
