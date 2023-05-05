@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Product from "./Product";
 import axios from "axios";
 import PersistedProducts from "./PersistedProducts";
+import { useCallback } from "react";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -34,6 +35,7 @@ const Products = () => {
     }
     window.location.href = session.url;
   };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -62,6 +64,37 @@ const Products = () => {
       setSelectedProducts([newProducts]);
     }
   };
+
+  const addItem = useCallback((id) => {
+    let products = JSON.parse(localStorage.getItem("products"));
+    if (!products) return;
+    const findProduct = products.findIndex((product) => product.id === id);
+    products[findProduct].quantity += 1;
+    localStorage.setItem("products", JSON.stringify(products));
+
+    setSelectedProducts(products);
+  }, []);
+
+  const removeItem = useCallback((id) => {
+    let products = JSON.parse(localStorage.getItem("products"));
+    if (!products) return;
+    const findProduct = products.findIndex((product) => product.id === id);
+    
+
+    if (products[findProduct].quantity <=1) {
+      let filteredProducts = products.filter((product) => product.id !== id);
+      localStorage.setItem("products", JSON.stringify(filteredProducts));
+      setSelectedProducts(filteredProducts);
+    }
+    else{
+      products[findProduct].quantity -= 1;
+      localStorage.setItem("products", JSON.stringify(products));
+  
+      setSelectedProducts(products);
+
+    }
+  }, []);
+
   return (
     <div className="flex-grow min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -81,7 +114,12 @@ const Products = () => {
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {selectedProducts?.map((product) => (
-            <PersistedProducts key={product.id} {...product} />
+            <PersistedProducts
+              key={product.id}
+              product={product}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
           ))}
         </div>
       </div>
