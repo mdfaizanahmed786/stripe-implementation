@@ -3,11 +3,13 @@ import Product from "./Product";
 import axios from "axios";
 import PersistedProducts from "./PersistedProducts";
 import { useCallback } from "react";
+import calcuateTotal from "../utils/checkoutPrice";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const [totalSum, setTotalSum]=useState(0)
   const [selectedProducts, setSelectedProducts] = useState(
     () => JSON.parse(localStorage.getItem("products")) || []
   );
@@ -16,7 +18,7 @@ const Products = () => {
     const { data } = await axios.get("http://localhost:3001/products");
     setProducts(data);
   };
-
+  // function to checkout using stripe
   const handleCheckout = async () => {
     const response = await fetch("http://localhost:3001/api/checkout_session", {
       method: "POST",
@@ -40,9 +42,10 @@ const Products = () => {
     getProducts();
   }, []);
 
+  // adding to cart ps in localStorage
   const handleSelect = (product) => {
     const newProducts = { ...product };
-    delete newProducts.originalPrice;
+
     const storedProducts = JSON.parse(localStorage.getItem("products"));
     if (storedProducts) {
       const productIndex = storedProducts.findIndex(
@@ -54,17 +57,21 @@ const Products = () => {
           JSON.stringify([...storedProducts, newProducts])
         );
         setSelectedProducts([...storedProducts, newProducts]);
+        setTotalSum(calcuateTotal([...storedProducts, newProducts]))
       } else {
         storedProducts[productIndex].quantity += 1;
         localStorage.setItem("products", JSON.stringify(storedProducts));
         setSelectedProducts(storedProducts);
+        setTotalSum(calcuateTotal(storedProducts))
       }
     } else {
       localStorage.setItem("products", JSON.stringify([newProducts]));
+      setTotalSum(calcuateTotal(newProducts))
       setSelectedProducts([newProducts]);
     }
   };
 
+  // adding items in the basket
   const addItem = useCallback((id) => {
     let products = JSON.parse(localStorage.getItem("products"));
     if (!products) return;
@@ -73,27 +80,29 @@ const Products = () => {
     localStorage.setItem("products", JSON.stringify(products));
 
     setSelectedProducts(products);
+    setTotalSum(calcuateTotal(products))
   }, []);
 
+  // removing items from the basket
   const removeItem = useCallback((id) => {
     let products = JSON.parse(localStorage.getItem("products"));
     if (!products) return;
     const findProduct = products.findIndex((product) => product.id === id);
-    
 
-    if (products[findProduct].quantity <=1) {
+    if (products[findProduct].quantity <= 1) {
       let filteredProducts = products.filter((product) => product.id !== id);
       localStorage.setItem("products", JSON.stringify(filteredProducts));
       setSelectedProducts(filteredProducts);
-    }
-    else{
+      setTotalSum(calcuateTotal(filteredProducts))
+    } else {
       products[findProduct].quantity -= 1;
       localStorage.setItem("products", JSON.stringify(products));
-  
+      setTotalSum(calcuateTotal(products))
       setSelectedProducts(products);
-
     }
   }, []);
+
+  
 
   return (
     <div className="flex-grow min-h-screen">
@@ -129,6 +138,7 @@ const Products = () => {
           disabled={selectedProducts.length === 0}
           onClick={handleCheckout}
         >
+        <span className="mr-1">${totalSum} </span>
           Checkout
         </button>
 
@@ -138,6 +148,7 @@ const Products = () => {
           onClick={() => {
             localStorage.removeItem("products");
             setSelectedProducts([]);
+            setTotalSum(calcuateTotal([]))
           }}
         >
           Clear Cart

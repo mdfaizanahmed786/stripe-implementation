@@ -29,6 +29,12 @@
       "password": "rehana",
       "stripeId": "cus_Nq0nVnteGz7rpm",
       "id": 5
+    },
+    {
+      "email": "riyan@gmail.com",
+      "password": "rehana",
+      "stripeId": "cus_Nq8RQob7FPegEK",
+      "id": 6
     }
   ]
 }
