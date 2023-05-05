@@ -9,6 +9,8 @@ const Products = () => {
     () => JSON.parse(localStorage.getItem("products")) || []
   );
 
+
+
   const getProducts = async () => {
     const { data } = await axios.get("http://localhost:3001/products");
     setProducts(data);
@@ -19,25 +21,27 @@ const Products = () => {
   }, []);
 
   const handleSelect = (product) => {
+    const newProducts = { ...product };
+    delete newProducts.price;
     const storedProducts = JSON.parse(localStorage.getItem("products"));
     if (storedProducts) {
       const productIndex = storedProducts.findIndex(
-        (storedProduct) => storedProduct.id === product.id
+        (storedProduct) => storedProduct.id === newProducts.id
       );
       if (productIndex === -1) {
         localStorage.setItem(
           "products",
-          JSON.stringify([...storedProducts, product])
+          JSON.stringify([...storedProducts, newProducts])
         );
-        setSelectedProducts([...storedProducts, product]);
+        setSelectedProducts([...storedProducts, newProducts]);
       } else {
         storedProducts[productIndex].quantity += 1;
         localStorage.setItem("products", JSON.stringify(storedProducts));
         setSelectedProducts(storedProducts);
       }
     } else {
-      localStorage.setItem("products", JSON.stringify([product]));
-      setSelectedProducts([product]);
+      localStorage.setItem("products", JSON.stringify([newProducts]));
+      setSelectedProducts([newProducts]);
     }
   };
   return (
@@ -62,6 +66,11 @@ const Products = () => {
             <PersistedProducts key={product.id} {...product} />
           ))}
         </div>
+      </div>
+      <div className="flex justify-center my-8">
+        <button className="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-bold py-2 px-4 rounded md:py-3 md:px-6 md:text-lg" disabled={selectedProducts.length===0}>
+          Checkout
+        </button>
       </div>
     </div>
   );

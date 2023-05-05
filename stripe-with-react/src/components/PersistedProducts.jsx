@@ -5,6 +5,7 @@ const PersistedProducts = (product) => {
         <div className="bg-blue-500 rounded-md h-24  w-full"></div>
         <h3 className="text-lg font-medium mb-2">{product.product_name}</h3>
         <div className="text-gray-500">${product.price}</div>
+        <div>Quantity: {product.quantity}</div>
       </div>
     </div>
   );

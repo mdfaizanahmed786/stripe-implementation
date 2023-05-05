@@ -39,7 +39,33 @@ app.get("/products", async  (req, res)=>{
 
 
 
-app.post("/api/checkout_session", async (req, res) => {});
+app.post("/api/checkout_session", async (req, res) => {
+  if(items.length===0){
+    return res.status(400).json({message:"No items in cart"})
+  }
+  if(!email){
+    return res.status(400).json({message:"No email provided"})
+  }
+  if(!customerId){
+    return res.status(400).json({message:"No customer id provided"})
+  }
+const {items, email, customerId}=req.body
+  const checkoutObject={
+    payment_method_types: ["card"],
+    line_items:items,
+    metadata:{
+      email,
+    
+    },
+    customer:customerId,
+    mode: "payment",
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/failure",
+  }
+
+  const session=await stripe.checkout.sessions.create(checkoutObject)
+  res.json({id:session.id})
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
